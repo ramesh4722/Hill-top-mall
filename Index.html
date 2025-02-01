@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hill Top Cloth Mall</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <h1>Welcome to Hill Top Cloth Mall</h1>
+    <nav>
+      <button onclick="showSection('cloth-shop')">Cloth Shop</button>
+      <button onclick="showSection('tailor-shop')">Tailor Shop</button>
+      <button onclick="showSection('cart')">Cart (<span id="cart-count">0</span>)</button>
+      <button onclick="showSection('orders')">Orders</button>
+      <button onclick="showSection('contact')">Contact Us</button>
+      <button onclick="toggleLogin()" id="login-btn">Login</button>
+    </nav>
+  </header>
+  <main>
+    <!-- Cloth Shop Section -->
+    <section id="cloth-shop" class="active">
+      <h2>Cloth Shop</h2>
+      <div class="product-list">
+        <div class="product">
+          <img src="https://via.placeholder.com/150" alt="Men's Shirt">
+          <h3>Men's Shirt</h3>
+          <p>Rs. 1000</p>
+          <button onclick="addToCart('Men\'s Shirt', 1000)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img src="https://via.placeholder.com/150" alt="Women's Dress">
+          <h3>Women's Dress</h3>
+          <p>Rs. 1500</p>
+          <button onclick="addToCart('Women\'s Dress', 1500)">Add to Cart</button>
+        </div>
+        <div class="product">
+          <img src="https://via.placeholder.com/150" alt="Kids T-Shirt">
+          <h3>Kids T-Shirt</h3>
+          <p>Rs. 800</p>
+          <button onclick="addToCart('Kids T-Shirt', 800)">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tailor Shop Section -->
+    <section id="tailor-shop">
+      <h2>Tailor Shop</h2>
+      <div class="service-list">
+        <div class="service">
+          <h3>Stitching</h3>
+          <p>Rs. 200</p>
+          <button onclick="bookService('Stitching', 200)">Book Now</button>
+        </div>
+        <div class="service">
+          <h3>Alteration</h3>
+          <p>Rs. 100</p>
+          <button onclick="bookService('Alteration', 100)">Book Now</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section id="cart">
+      <h2>Your Cart</h2>
+      <div id="cart-items"></div>
+      <button onclick="checkout()" class="checkout-btn">Checkout</button>
+    </section>
+
+    <!-- Orders Section -->
+    <section id="orders">
+      <h2>Your Orders</h2>
+      <div id="order-list"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>Address: 123 Hill Top, City</p>
+      <p>Phone: +91 1234567890</p>
+      <p>Email: info@hilltopclothmall.com</p>
+      <div class="map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3502.123456789012!2d77.12345678901234!3d28.123456789012345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjjCsDA3JzI0LjQiTiA3N8KwMDcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123!5m2!1sen!2sin"
+          width="100%"
+          height="300"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="toggleLogin()">&times;</span>
+        <h2>Login</h2>
+        <form id="login-form">
+          <input type="text" id="username" placeholder="Username" required>
+          <input type="password" id="password" placeholder="Password" required>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <p>&copy; 2025 Hill Top Cloth Mall</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hill Top Cloth Mall</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header and Nav (Same as Before) -->
+
+  <main>
+    <!-- Existing Sections (Cloth Shop, Tailor Shop, Cart, etc.) -->
+
+    <!-- ===== NEW SECTIONS ===== -->
+    
+    <!-- Stock Management -->
+    <section id="stock-management">
+      <h2>Stock Management</h2>
+      <div class="add-product">
+        <input type="text" id="product-name" placeholder="Product Name">
+        <input type="number" id="initial-stock" placeholder="Initial Stock">
+        <button onclick="addProduct()">Add Product</button>
+      </div>
+      <table>
+        <tr>
+          <th>Product</th>
+          <th>Current Stock</th>
+          <th>Action</th>
+        </tr>
+        <tbody id="stock-list"></tbody>
+      </table>
+    </section>
+
+    <!-- Employee Payroll -->
+    <section id="employee-payroll">
+      <h2>Employee Payments</h2>
+      <div class="add-employee">
+        <input type="text" id="emp-name" placeholder="Employee Name">
+        <input type="number" id="daily-wage" placeholder="Daily Wage">
+        <button onclick="addEmployee()">Add Employee</button>
+      </div>
+      <table>
+        <tr>
+          <th>Employee</th>
+          <th>Daily Wage</th>
+          <th>Total Paid</th>
+          <th>Action</th>
+        </tr>
+        <tbody id="employee-list"></tbody>
+      </table>
+    </section>
+
+    <!-- Sales and Finance Reports -->
+    <section id="finance-reports">
+      <h2>Financial Reports</h2>
+      <div class="time-filters">
+        <button onclick="showReport('daily')">Daily</button>
+        <button onclick="showReport('monthly')">Monthly</button>
+        <button onclick="showReport('yearly')">Yearly</button>
+      </div>
+      <div id="report-data"></div>
+    </section>
+
+    <!-- Tailor Booking Management -->
+    <section id="tailor-management">
+      <h2>Tailor Bookings</h2>
+      <div class="booking-form">
+        <input type="date" id="booking-date">
+        <input type="text" id="customer-name" placeholder="Customer Name">
+        <button onclick="addBooking()">Add Booking</button>
+      </div>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Customer</th>
+          <th>Status</th>
+        </tr>
+        <tbody id="booking-list"></tbody>
+      </table>
+    </section>
+
+    <!-- Chat System -->
+    <section id="chat-system">
+      <h2>Staff Chat</h2>
+      <div id="chat-messages"></div>
+      <div class="message-box">
+        <input type="text" id="message-input">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html><!-- analytics.html -->
+<div class="dashboard">
+  <div class="chart-container">
+    <canvas id="salesChart"></canvas>
+  </div>
+  
+  <div class="kpi-cards">
+    <div class="kpi">
+      <h3>Inventory Health</h3>
+      <div id="inventoryHealthGauge"></div>
+    </div>
+    
+    <div class="kpi">
+      <h3>Employee Efficiency</h3>
+      <div id="efficiencyMeter"></div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Sales Chart
+const ctx = document.getElementById('salesChart').getContext('2d');
+new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr'],
+    datasets: [{
+      label: 'Monthly Sales',
+      data: [120000, 135000, 145000, 160000],
+      borderColor: '#007BFF'
+    }]
+  }
+});
+</script><!-- barcode.html -->
+<div id="scanner-container">
+  <video id="barcodeScanner" width="300" height="200"></video>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+<script>
+Quagga.init({
+  inputStream: {
+    name: "Live",
+    type: "LiveStream",
+    target: document.querySelector('#barcodeScanner')
+  },
+  decoder: {
+    readers: ["code_128_reader"]
+  }
+}, err => {
+  if(err) console.error(err);
+  Quagga.start();
+});
+
+Quagga.onDetected(result => {
+  const code = result.codeResult.code;
+  handleBarcodeScan(code);
+});
+</script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Top Tailor Shop</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .section { border: 1px solid #ddd; padding: 20px; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        input[type="text"], input[type="number"] { padding: 5px; width: 200px; }
+        button { padding: 8px 15px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h1>Hill Top Tailor Shop Management</h1>
+
+    <!-- Suit Inventory Management -->
+    <div class="section">
+        <h2>Suit Inventory</h2>
+        <div>
+            <input type="text" id="suitName" placeholder="Suit Name">
+            <input type="number" id="suitPrice" placeholder="Price">
+            <input type="number" id="suitQuantity" placeholder="Quantity">
+            <button onclick="addSuit()">Add Suit</button>
+        </div>
+        <table id="inventoryTable">
+            <tr>
+                <th>Suit Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Daily Sales -->
+    <div class="section">
+        <h2>Daily Sales</h2>
+        <div>
+            <select id="suitSelect"></select>
+            <input type="number" id="saleQuantity" placeholder="Quantity" min="1">
+            <input type="text" id="customerName" placeholder="Customer Name">
+            <button onclick="recordSale()">Record Sale</button>
+        </div>
+        <table id="salesTable">
+            <tr>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Suit</th>
+                <th>Quantity</th>
+                <th>Amount</th>
+                <th>Payment Status</th>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Financial Management -->
+    <div class="section">
+        <h2>Financial Records</h2>
+        <div>
+            <button onclick="showDailyReport()">Daily</button>
+            <button onclick="showWeeklyReport()">Weekly</button>
+            <button onclick="showMonthlyReport()">Monthly</button>
+            <button onclick="showYearlyReport()">Yearly</button>
+        </div>
+        <div id="financialReport"></div>
+    </div>
+
+<script>
+// Database
+let tailorShop = {
+    inventory: [],
+    sales: [],
+    finances: {
+        income: [],
+        expenses: []
+    }
+};
+
+// Inventory Functions
+function addSuit() {
+    const suit = {
+        id: Date.now(),
+        name: document.getElementById('suitName').value,
+        price: parseFloat(document.getElementById('suitPrice').value),
+        quantity: parseInt(document.getElementById('suitQuantity').value)
+    };
+    tailorShop.inventory.push(suit);
+    updateInventoryDisplay();
+    updateSuitDropdown();
+}
+
+function updateInventoryDisplay() {
+    const table = document.getElementById('inventoryTable');
+    table.innerHTML = `
+        <tr>
+            <th>Suit Name</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Actions</th>
+        </tr>
+    `;
+    
+    tailorShop.inventory.forEach(suit => {
+        table.innerHTML += `
+            <tr>
+                <td>${suit.name}</td>
+                <td>₹${suit.price}</td>
+                <td>${suit.quantity}</td>
+                <td>
+                    <button onclick="restockSuit(${suit.id}, 5)">+5</button>
+                    <button onclick="sellSuit(${suit.id})">Sell</button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+// Sales Functions
+function recordSale() {
+    const suitId = parseInt(document.getElementById('suitSelect').value);
+    const quantity = parseInt(document.getElementById('saleQuantity').value);
+    const customerName = document.getElementById('customerName').value;
+    
+    const suit = tailorShop.inventory.find(s => s.id === suitId);
+    if(suit.quantity >= quantity) {
+        const sale = {
+            date: new Date().toLocaleDateString(),
+            customer: customerName,
+            suit: suit.name,
+            quantity: quantity,
+            amount: suit.price * quantity,
+            paid: false
+        };
+        
+        tailorShop.sales.push(sale);
+        suit.quantity -= quantity;
+        updateInventoryDisplay();
+        updateSalesDisplay();
+    } else {
+        alert("Not enough stock!");
+    }
+}
+
+// Financial Reports
+function showDailyReport() {
+    const today = new Date().toLocaleDateString();
+    const dailySales = tailorShop.sales.filter(s => s.date === today);
+    generateFinancialReport(dailySales, 'Daily');
+}
+
+function generateFinancialReport(data, period) {
+    const totalIncome = data.reduce((sum, sale) => sum + sale.amount, 0);
+    const totalExpenses = tailorShop.finances.expenses
+        .filter(e => e.date.startsWith(period))
+        .reduce((sum, exp) => sum + exp.amount, 0);
+        
+    const report = `
+        <h3>${period} Report</h3>
+        <p>Total Income: ₹${totalIncome}</p>
+        <p>Total Expenses: ₹${totalExpenses}</p>
+        <p>Net Profit: ₹${totalIncome - totalExpenses}</p>
+    `;
+    
+    document.getElementById('financialReport').innerHTML = report;
+}
+
+// Utility Functions
+function updateSuitDropdown() {
+    const select = document.getElementById('suitSelect');
+    select.innerHTML = tailorShop.inventory
+        .map(s => `<option value="${s.id}">${s.name}</option>`)
+        .join('');
+}
+
+function updateSalesDisplay() {
+    const table = document.getElementById('salesTable');
+    table.innerHTML = `
+        <tr>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Suit</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Payment Status</th>
+        </tr>
+    `;
+    
+    tailorShop.sales.forEach(sale => {
+        table.innerHTML += `
+            <tr>
+                <td>${sale.date}</td>
+                <td>${sale.customer}</td>
+                <td>${sale.suit}</td>
+                <td>${sale.quantity}</td>
+                <td>₹${sale.amount}</td>
+                <td>${sale.paid ? 'Paid' : 'Pending'}</td>
+            </tr>
+        `;
+    });
+}
+
+// Initial Setup
+updateSuitDropdown();
+</script>
+</body>
+</html><div>
+    <input type="text" id="expenseDesc" placeholder="Expense Description">
+    <input type="number" id="expenseAmount" placeholder="Amount">
+    <button onclick="addExpense()">Add Expense</button>
+</div<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Top Tailor Shop</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+        }
+
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f5f6fa;
+        }
+
+        .section { 
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px;
+            width: 200px;
+            display: inline-block;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            background-color: var(--secondary-color);
+            color: white;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        button:hover {
+            background-color: #2980b9;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .print-btn {
+            background-color: var(--accent-color);
+            margin-left: 10px;
+        }
+
+        #billingPreview {
+            background: white;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 15px;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #billingPreview, #billingPreview * {
+                visibility: visible;
+            }
+            #billingPreview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: var(--primary-color); text-align: center;">Hill Top Tailor Shop</h1>
+
+    <!-- Products Dashboard -->
+    <div class="section">
+        <h2>Products Dashboard</h2>
+        <div id="productsContainer"></div>
+    </div>
+
+    <!-- Billing Section -->
+    <div class="section">
+        <h2>Billing System</h2>
+        <div id="billingPreview">
+            <h3>Last Bill</h3>
+            <table id="billTable">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="billItems"></tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align: right;">Grand Total:</td>
+                        <td id="grandTotal">₹0</td>
+                    </tr>
+                </tfoot>
+            </table>
+            <button onclick="printBill()" class="print-btn">Print Bill</button>
+        </div>
+    </div>
+
+<script>
+// Sample Products Data
+let products = [
+    {
+        id: 1,
+        name: "Men's Formal Suit",
+        price: 2999,
+        image: "https://via.placeholder.com/200x150.png?text=Mens+Suit",
+        stock: 15
+    },
+    {
+        id: 2,
+        name: "Women's Silk Saree",
+        price: 1599,
+        image: "https://via.placeholder.com/200x150.png?text=Silk+Saree",
+        stock: 10
+    }
+];
+
+// Billing System
+let currentBill = {
+    items: [],
+    total: 0
+};
+
+// Display Products
+function displayProducts() {
+    const container = document.getElementById('productsContainer');
+    container.innerHTML = '';
+    
+    products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <img src="${product.image}" class="product-img" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>₹${product.price}</p>
+            <p>Stock: ${product.stock}</p>
+            <button onclick="addToBill(${product.id})">Sell Item</button>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// Add to Bill
+function addToBill(productId) {
+    const product = products.find(p => p.id === productId);
+    if(product.stock > 0) {
+        const existingItem = currentBill.items.find(item => item.id === productId);
+        
+        if(existingItem) {
+            existingItem.quantity++;
+            existingItem.total += product.price;
+        } else {
+            currentBill.items.push({
+                id: productId,
+                name: product.name,
+                price: product.price,
+                quantity: 1,
+                total: product.price
+            });
+        }
+        
+        product.stock--;
+        currentBill.total += product.price;
+        updateBillDisplay();
+        displayProducts();
+    } else {
+        alert('Out of stock!');
+    }
+}
+
+// Update Bill Display
+function updateBillDisplay() {
+    const billBody = document.getElementById('billItems');
+    const grandTotal = document.getElementById('grandTotal');
+    
+    billBody.innerHTML = '';
+    currentBill.items.forEach(item => {
+        billBody.innerHTML += `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.quantity}</td>
+                <td>₹${item.price}</td>
+                <td>₹${item.total}</td>
+            </tr>
+        `;
+    });
+    
+    grandTotal.textContent = `₹${currentBill.total}`;
+}
+
+// Print Bill
+function printBill() {
+    window.print();
+}
+
+// Initialize
+displayProducts();
+</script>
+</body>
+</html<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Top Tailor Shop</title>
+    <style>
+        /* Add previous styles here */
+
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .user-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .settings-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .user-card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginSection">
+        <h2>Shop Login</h2>
+        <input type="text" id="inputUsername" placeholder="Username">
+        <input type="password" id="inputPassword" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <div id="mainApp" class="hidden">
+        <div class="user-menu">
+            Logged in as: <span id="currentUser"></span>
+            <button onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Navigation -->
+        <div class="section">
+            <button onclick="showSection('products')">Products</button>
+            <button onclick="showSection('billing')">Billing</button>
+            <button onclick="showSection('users')">Users</button>
+            <button onclick="showSection('settings')">Settings</button>
+        </div>
+
+        <!-- Products Management -->
+        <div class="section" id="productsSection">
+            <h2>Product Management</h2>
+            <div class="section">
+                <h3>Add New Product</h3>
+                <input type="text" id="newProductName" placeholder="Product Name">
+                <input type="number" id="newProductPrice" placeholder="Price">
+                <input type="number" id="newProductStock" placeholder="Initial Stock">
+                <input type="text" id="newProductImage" placeholder="Image URL">
+                <button onclick="addNewProduct()">Add Product</button>
+            </div>
+            <div id="productsContainer"></div>
+        </div>
+
+        <!-- User Management -->
+        <div class="section hidden" id="usersSection">
+            <h2>User Management</h2>
+            <div class="section">
+                <h3>Add New User</h3>
+                <input type="text" id="newUsername" placeholder="Username">
+                <input type="password" id="newPassword" placeholder="Password">
+                <select id="newUserRole">
+                    <option value="staff">Staff</option>
+                    <option value="owner">Owner</option>
+                </select>
+                <button onclick="addNewUser()">Add User</button>
+            </div>
+            <div id="usersList"></div>
+        </div>
+
+        <!-- System Settings -->
+        <div class="section hidden" id="settingsSection">
+            <h2>System Settings</h2>
+            <div class="settings-section">
+                <div>
+                    <h3>Shop Information</h3>
+                    <input type="text" id="shopName" placeholder="Shop Name">
+                    <input type="text" id="shopCurrency" placeholder="Currency Symbol">
+                </div>
+                <div>
+                    <h3>Preferences</h3>
+                    <label>
+                        <input type="checkbox" id="enableStockAlerts"> Enable Stock Alerts
+                    </label>
+                </div>
+            </div>
+            <button onclick="saveSettings()">Save Settings</button>
+        </div>
+
+        <!-- Keep previous billing section -->
+    </div>
+
+<script>
+// System Data Structure
+let systemData = {
+    users: [
+        { username: "owner", password: "admin123", role: "owner" }
+    ],
+    products: [],
+    settings: {
+        shopName: "Hill Top Tailor Shop",
+        currency: "₹",
+        stockAlert: true
+    },
+    currentUser: null
+};
+
+// Initialize from localStorage
+function initializeSystem() {
+    const savedData = localStorage.getItem('tailorSystem');
+    if(savedData) systemData = JSON.parse(savedData);
+}
+
+function saveSystem() {
+    localStorage.setItem('tailorSystem', JSON.stringify(systemData));
+}
+
+// User Management
+function login() {
+    const username = document.getElementById('inputUsername').value;
+    const password = document.getElementById('inputPassword').value;
+    
+    const user = systemData.users.find(u => u.username === username && u.password === password);
+    if(user) {
+        systemData.currentUser = user;
+        document.getElementById('mainApp').classList.remove('hidden');
+        document.getElementById('loginSection').classList.add('hidden');
+        document.getElementById('currentUser').textContent = user.username;
+        loadSystemData();
+    } else {
+        alert('Invalid credentials!');
+    }
+}
+
+function logout() {
+    systemData.currentUser = null;
+    document.getElementById('mainApp').classList.add('hidden');
+    document.getElementById('loginSection').classList.remove('hidden');
+}
+
+// Product Management
+function addNewProduct() {
+    const newProduct = {
+        id: Date.now(),
+        name: document.getElementById('newProductName').value,
+        price: parseFloat(document.getElementById('newProductPrice').value),
+        stock: parseInt(document.getElementById('newProductStock').value),
+        image: document.getElementById('newProductImage').value
+    };
+    
+    systemData.products.push(newProduct);
+    saveSystem();
+    displayProducts();
+}
+
+function deleteProduct(productId) {
+    systemData.products = systemData.products.filter(p => p.id !== productId);
+    saveSystem();
+    displayProducts();
+}
+
+// User Management
+function addNewUser() {
+    if(systemData.currentUser.role !== 'owner') {
+        alert('Only owners can add users!');
+        return;
+    }
+    
+    const newUser = {
+        username: document.getElementById('newUsername').value,
+        password: document.getElementById('newPassword').value,
+        role: document.getElementById('newUserRole').value
+    };
+    
+    systemData.users.push(newUser);
+    saveSystem();
+    displayUsers();
+}
+
+function deleteUser(username) {
+    systemData.users = systemData.users.filter(u => u.username !== username);
+    saveSystem();
+    displayUsers();
+}
+
+// Settings Management
+function saveSettings() {
+    systemData.settings = {
+        shopName: document.getElementById('shopName').value,
+        currency: document.getElementById('shopCurrency').value,
+        stockAlert: document.getElementById('enableStockAlerts').checked
+    };
+    saveSystem();
+    loadSystemData();
+}
+
+// UI Functions
+function showSection(sectionId) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.add('hidden'));
+    document.getElementById(`${sectionId}Section`).classList.remove('hidden');
+}
+
+function displayProducts() {
+    const container = document.getElementById('productsContainer');
+    container.innerHTML = '';
+    
+    systemData.products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'product-card';
+        card.innerHTML = `
+            <img src="${product.image}" class="product-img" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${systemData.settings.currency}${product.price}</p>
+            <p>Stock: ${product.stock}</p>
+            <div>
+                <button onclick="deleteProduct(${product.id})">Delete</button>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+function displayUsers() {
+    const container = document.getElementById('usersList');
+    container.innerHTML = '';
+    
+    systemData.users.forEach(user => {
+        const card = document.createElement('div');
+        card.className = 'user-card';
+        card.innerHTML = `
+            <h4>${user.username} (${user.role})</h4>
+            ${user.username !== 'owner' ? `<button onclick="deleteUser('${user.username}')">Delete</button>` : ''}
+        `;
+        container.appendChild(card);
+    });
+}
+
+function loadSystemData() {
+    // Load settings
+    document.getElementById('shopName').value = systemData.settings.shopName;
+    document.getElementById('shopCurrency').value = systemData.settings.currency;
+    document.getElementById('enableStockAlerts').checked = systemData.settings.stockAlert;
+    
+    // Update shop name display
+    document.querySelector('h1').textContent = systemData.settings.shopName;
+    
+    // Load data
+    displayProducts();
+    displayUsers();
+}
+
+// Initialize
+initializeSystem();
+if(systemData.currentUser) {
+    document.getElementById('mainApp').classList.remove('hidden');
+    document.getElementById('loginSection').classList.add('hidden');
+    loadSystemData();
+}
+</script>
+</body>
+</html><!-- In the settings section -->
+<div>
+    <h3>Shop Information</h3>
+    <input type="text" id="shopName" placeholder="Shop Name">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</style>
+
+<!-- Updated Navigation -->
+<nav class="navbar">
+    <div class="logo">HILLTOP</div>
+    <div class="user-menu">
+        <button class="profile-btn">
+            <div class="profile-pic">U</div>
+            <span id="currentUser">Username</span>
+            <i class="fas fa-chevron-down"></i>
+        </button>
+        <div class="dropdown-menu">
+            <!-- Dropdown content -->
+        </div>
+    </div>
+</nav>
+
+<!-- Add floating action button -->
+<div class="fab">
+    <button class="print-btn">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-counter">3</span>
+    </button>
+</div>
+
+<!-- Add loading states -->
+<div class="loading" style="width: 200px; height: 40px; margin: 10px 0;"></div><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Top Cloth Mall</title>
+    <style>
+        /* Previous styles remain same */
+        
+        .limit-counter {
+            background: #ff4757;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        
+        .booking-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Add Product Section -->
+    <div class="section">
+        <h2>Product Management 
+            <span class="limit-counter" id="productCounter">0/400</span>
+        </h2>
+        <!-- Product form remains same -->
+    </div>
+
+    <!-- New Booking Section -->
+    <div class="section">
+        <h2>Suit Bookings 
+            <span class="limit-counter" id="bookingCounter">0/1000</span>
+        </h2>
+        
+        <div class="booking-form">
+            <input type="text" id="customerName" placeholder="Customer Name">
+            <select id="suitType">
+                <option value="wedding">Wedding Suit</option>
+                <option value="formal">Formal Suit</option>
+                <option value="casual">Casual Suit</option>
+            </select>
+            <input type="date" id="bookingDate">
+            <input type="number" id="suitQuantity" placeholder="Quantity" min="1">
+            <button onclick="addBooking()">Add Booking</button>
+        </div>
+
+        <table id="bookingsTable">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Customer Name</th>
+                    <th>Suit Type</th>
+                    <th>Booking Date</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+<script>
+// Updated System Data
+let systemData = {
+    products: [],
+    bookings: [],
+    settings: {
+        maxProducts: 400,
+        maxBookings: 1000
+    }
+};
+
+// Updated Add Product Function
+function addNewProduct() {
+    if(systemData.products.length >= systemData.settings.maxProducts) {
+        alert('Product limit reached! Maximum 400 products allowed.');
+        return;
+    }
+    
+    // Rest of product adding code
+    updateProductCounter();
+}
+
+// New Booking Functions
+function addBooking() {
+    if(systemData.bookings.length >= systemData.settings.maxBookings) {
+        alert('Booking limit reached! Maximum 1000 bookings allowed.');
+        return;
+    }
+
+    const newBooking = {
+        id: Date.now(),
+        customerName: document.getElementById('customerName').value,
+        suitType: document.getElementById('suitType').value,
+        bookingDate: document.getElementById('bookingDate').value,
+        quantity: parseInt(document.getElementById('suitQuantity').value),
+        status: 'Pending',
+        createdAt: new Date()
+    };
+
+    systemData.bookings.push(newBooking);
+    updateBookingDisplay();
+    updateBookingCounter();
+}
+
+function updateBookingDisplay() {
+    const tbody = document.querySelector('#bookingsTable tbody');
+    tbody.innerHTML = '';
+    
+    systemData.bookings.forEach(booking => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${booking.id}</td>
+                <td>${booking.customerName}</td>
+                <td>${booking.suitType}</td>
+                <td>${booking.bookingDate}</td>
+                <td>${booking.quantity}</td>
+                <td><span class="status-badge ${booking.status}">${booking.status}</span></td>
+                <td>
+                    <button onclick="confirmBooking(${booking.id})">Confirm</button>
+                    <button onclick="cancelBooking(${booking.id})">Cancel</button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+function confirmBooking(bookingId) {
+    const booking = systemData.bookings.find(b => b.id === bookingId);
+    booking.status = 'Confirmed';
+    updateBookingDisplay();
+}
+
+function cancelBooking(bookingId) {
+    systemData.bookings = systemData.bookings.filter(b => b.id !== bookingId);
+    updateBookingDisplay();
+    updateBookingCounter();
+}
+
+// Counter Updates
+function updateProductCounter() {
+    document.getElementById('productCounter').textContent = 
+        `${systemData.products.length}/${systemData.settings.maxProducts}`;
+}
+
+function updateBookingCounter() {
+    document.getElementById('bookingCounter').textContent = 
+        `${systemData.bookings.length}/${systemData.settings.maxBookings}`;
+}
+
+// Initialize Counters
+updateProductCounter();
+updateBookingCounter();
+</script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Top Cloth Mall - Admin Panel</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --text: #2c3e50;
+            --bg: #f8f9fa;
+        }
+
+        /* Previous styles remain same */
+
+        .admin-panel {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .sidebar {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .content-area {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .editable-field {
+            border: 1px solid #ddd;
+            padding: 8px;
+            border-radius: 5px;
+            cursor: text;
+        }
+
+        .editable-field:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-panel">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h3>Admin Controls</h3>
+            <ul>
+                <li><button onclick="showSection('user-management')">User Management</button></li>
+                <li><button onclick="showSection('stock-management')">Stock in Meters</button></li>
+                <li><button onclick="showSection('shop-settings')">Shop Settings</button></li>
+                <li><button onclick="showSection('sales-control')">Sales Options</button></li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content-area" id="contentArea">
+            <!-- User Management Section -->
+            <div id="user-management" class="section">
+                <h2>User Management</h2>
+                <div class="user-form">
+                    <input type="text" id="newUserName" placeholder="New Username">
+                    <input type="password" id="newUserPass" placeholder="Password">
+                    <select id="userRole">
+                        <option value="admin">Admin</option>
+                        <option value="staff">Staff</option>
+                    </select>
+                    <button onclick="addUser()">Add User</button>
+                </div>
+                <table id="usersTable">
+                    <!-- Users list will be populated here -->
+                </table>
+            </div>
+
+            <!-- Stock Management in Meters -->
+            <div id="stock-management" class="section hidden">
+                <h2>Stock Management (Meters)</h2>
+                <div class="stock-form">
+                    <input type="text" id="fabricName" placeholder="Fabric Name">
+                    <input type="number" step="0.01" id="fabricMeters" placeholder="Meters">
+                    <button onclick="addFabric()">Add Fabric</button>
+                </div>
+                <table id="fabricStock">
+                    <!-- Fabric stock will be populated here -->
+                </table>
+            </div>
+
+            <!-- Shop Settings -->
+            <div id="shop-settings" class="section hidden">
+                <h2>Shop Settings</h2>
+                <div class="setting-item">
+                    <label>Shop Address:</label>
+                    <input type="text" id="shopAddress" class="editable-field">
+                </div>
+                <div class="setting-item">
+                    <label>Contact Number:</label>
+                    <input type="tel" id="contactNumber" class="editable-field">
+                </div>
+                <button onclick="saveSettings()">Save Settings</button>
+            </div>
+
+            <!-- Sales Control -->
+            <div id="sales-control" class="section hidden">
+                <h2>Sales in Meters</h2>
+                <div class="sale-form">
+                    <select id="selectedFabric"></select>
+                    <input type="number" step="0.01" id="saleMeters" placeholder="Meters to sell">
+                    <button onclick="recordSale()">Record Sale</button>
+                </div>
+                <table id="salesRecords">
+                    <!-- Sales records will be populated here -->
+                </table>
+            </div>
+        </div>
+    </div>
+
+<script>
+// Database
+let shopData = {
+    users: [],
+    fabrics: [],
+    settings: {
+        address: "123 Hill Top Road",
+        contact: "+91 9876543210"
+    },
+    sales: []
+};
+
+// Initialize
+function init() {
+    // Load from localStorage
+    const savedData = localStorage.getItem('shopData');
+    if(savedData) shopData = JSON.parse(savedData);
+    
+    // Populate initial data
+    document.getElementById('shopAddress').value = shopData.settings.address;
+    document.getElementById('contactNumber').value = shopData.settings.contact;
+    updateFabricsDropdown();
+    refreshTables();
+}
+
+// User Management
+function addUser() {
+    const newUser = {
+        id: Date.now(),
+        username: document.getElementById('newUserName').value,
+        password: document.getElementById('newUserPass').value,
+        role: document.getElementById('userRole').value
+    };
+    shopData.users.push(newUser);
+    saveData();
+    refreshTables();
+}
+
+// Fabric Management
+function addFabric() {
+    const newFabric = {
+        id: Date.now(),
+        name: document.getElementById('fabricName').value,
+        meters: parseFloat(document.getElementById('fabricMeters').value),
+        created: new Date()
+    };
+    shopData.fabrics.push(newFabric);
+    saveData();
+    updateFabricsDropdown();
+    refreshTables();
+}
+
+// Sales Management
+function recordSale() {
+    const fabricId = parseInt(document.getElementById('selectedFabric').value);
+    const meters = parseFloat(document.getElementById('saleMeters').value);
+    
+    const fabric = shopData.fabrics.find(f => f.id === fabricId);
+    if(fabric.meters >= meters) {
+        fabric.meters -= meters;
+        shopData.sales.push({
+            fabricId,
+            meters,
+            date: new Date()
+        });
+        saveData();
+        refreshTables();
+    } else {
+        alert("Not enough stock available!");
+    }
+}
+
+// Settings Management
+function saveSettings() {
+    shopData.settings.address = document.getElementById('shopAddress').value;
+    shopData.settings.contact = document.getElementById('contactNumber').value;
+    saveData();
+}
+
+// Utilities
+function updateFabricsDropdown() {
+    const select = document.getElementById('selectedFabric');
+    select.innerHTML = shopData.fabrics
+        .map(f => `<option value="${f.id}">${f.name} (${f.meters}m)</option>`)
+        .join('');
+}
+
+function refreshTables() {
+    // Update users table
+    const usersTable = document.getElementById('usersTable');
+    usersTable.innerHTML = `
+        <tr>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Actions</th>
+        </tr>
+        ${shopData.users.map(user => `
+            <tr>
+                <td>${user.username}</td>
+                <td>${user.role}</td>
+                <td>
+                    <button onclick="editUser(${user.id})">Edit</button>
+                    <button onclick="deleteUser(${user.id})">Delete</button>
+                </td>
+            </tr>
+        `).join('')}
+    `;
+
+    // Update fabric stock table
+    const fabricTable = document.getElementById('fabricStock');
+    fabricTable.innerHTML = `
+        <tr>
+            <th>Fabric</th>
+            <th>Stock (m)</th>
+            <th>Actions</th>
+        </tr>
+        ${shopData.fabrics.map(fabric => `
+            <tr>
+                <td>${fabric.name}</td>
+                <td>${fabric.meters.toFixed(2)}</td>
+                <td>
+                    <button onclick="editFabric(${fabric.id})">Edit</button>
+                    <button onclick="deleteFabric(${fabric.id})">Delete</button>
+                </td>
+            </tr>
+        `).join('')}
+    `;
+
+    // Update sales records
+    const salesTable = document.getElementById('salesRecords');
+    salesTable.innerHTML = `
+        <tr>
+            <th>Date</th>
+            <th>Fabric</th>
+            <th>Meters Sold</th>
+        </tr>
+        ${shopData.sales.map(sale => `
+            <tr>
+                <td>${new Date(sale.date).toLocaleDateString()}</td>
+                <td>${shopData.fabrics.find(f => f.id === sale.fabricId)?.name || 'Deleted'}</td>
+                <td>${sale.meters.toFixed(2)}</td>
+            </tr>
+        `).join('')}
+    `;
+}
+
+function saveData() {
+    localStorage.setItem('shopData', JSON.stringify(shopData));
+}
+
+// Initialize system
+init();
+</script>
+</body>
+</html><!-- Tailor Management Section -->
+<div id="tailor-management" class="section hidden">
+    <h2>Tailor Management</h2>
+    
+    <!-- Tailor Registration -->
+    <div class="subsection">
+        <h3>Register New Tailor</h3>
+        <input type="text" id="tailorName" placeholder="Tailor Name">
+        <input type="number" id="tailorRate" placeholder="Per Suit Rate (₹)">
+        <button onclick="addTailor()">Register</button>
+    </div>
+
+    <!-- Daily Work Entry -->
+    <div class="subsection">
+        <h3>Record Daily Work</h3>
+        <select id="selectTailor"></select>
+        <input type="date" id="workDate">
+        <input type="number" id="suitsStitched" placeholder="Number of Suits">
+        <select id="qualityRating">
+            <option value="1">⭐ (Poor)</option>
+            <option value="2">⭐⭐ (Average)</option>
+            <option value="3">⭐⭐⭐ (Good)</option>
+            <option value="4">⭐⭐⭐⭐ (Very Good)</option>
+            <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+        </select>
+        <button onclick="recordDailyWork()">Save Entry</button>
+    </div>
+
+    <!-- Payment Management -->
+    <div class="subsection">
+        <h3>Record Payment</h3>
+        <select id="paymentTailor"></select>
+        <input type="number" id="paymentAmount" placeholder="Amount (₹)">
+        <input type="date" id="paymentDate">
+        <button onclick="recordPayment()">Record Payment</button>
+    </div>
+
+    <!-- Reports -->
+    <div class="subsection">
+        <h3>Reports</h3>
+        <div class="report-filters">
+            <button onclick="generateReport('daily')">Daily</button>
+            <button onclick="generateReport('monthly')">Monthly</button>
+            <button onclick="generateReport('yearly')">Yearly</button>
+        </div>
+        <div id="tailorReport"></div>
+    </div>
+</div>
+
+<script>
+// Data Structure Updates
+shopData.tailors = [];
+shopData.dailyWork = [];
+shopData.payments = [];
+
+// Add New Tailor
+function addTailor() {
+    const newTailor = {
+        id: Date.now(),
+        name: document.getElementById('tailorName').value,
+        rate: parseInt(document.getElementById('tailorRate').value),
+        joinDate: new Date()
+    };
+    shopData.tailors.push(newTailor);
+    updateTailorDropdowns();
+    saveData();
+}
+
+// Record Daily Work
+function recordDailyWork() {
+    const workEntry = {
+        tailorId: parseInt(document.getElementById('selectTailor').value),
+        date: document.getElementById('workDate').value,
+        suits: parseInt(document.getElementById('suitsStitched').value),
+        quality: parseInt(document.getElementById('qualityRating').value),
+        calculatedAmount: 0
+    };
+    
+    const tailor = shopData.tailors.find(t => t.id === workEntry.tailorId);
+    workEntry.calculatedAmount = workEntry.suits * tailor.rate;
+    
+    shopData.dailyWork.push(workEntry);
+    saveData();
+    generateReport('daily');
+}
+
+// Record Payment
+function recordPayment() {
+    const payment = {
+        tailorId: parseInt(document.getElementById('paymentTailor').value),
+        amount: parseInt(document.getElementById('paymentAmount').value),
+        date: document.getElementById('paymentDate').value
+    };
+    shopData.payments.push(payment);
+    saveData();
+    generateReport('monthly');
+}
+
+// Calculate Balance
+function calculateBalance(tailorId) {
+    const workTotal = shopData.dailyWork
+        .filter(w => w.tailorId === tailorId)
+        .reduce((sum, w) => sum + w.calculatedAmount, 0);
+
+    const paymentTotal = shopData.payments
+        .filter(p => p.tailorId === tailorId)
+        .reduce((sum, p) => sum + p.amount, 0);
+
+    return workTotal - paymentTotal;
+}
+
+// Generate Reports
+function generateReport(type) {
+    let reportHTML = "<h4>Tailor Report</h4><table class='report-table'>";
+    
+    shopData.tailors.forEach(tailor => {
+        const balance = calculateBalance(tailor.id);
+        
+        reportHTML += `
+            <tr>
+                <td>${tailor.name}</td>
+                <td>Total Suits: ${getTotalSuits(tailor.id, type)}</td>
+                <td>Total Amount: ₹${getTotalAmount(tailor.id, type)}</td>
+                <td>Balance: ₹${balance}</td>
+                <td>${balance >= 0 ? 'Shop Owes' : 'Tailor Owes'}</td>
+            </tr>
+        `;
+    });
+    
+    document.getElementById('tailorReport').innerHTML = reportHTML + "</table>";
+}
+
+// Update Dropdowns
+function updateTailorDropdowns() {
+    const options = shopData.tailors.map(t => 
+        `<option value="${t.id}">${t.name} (₹${t.rate}/suit)</option>`
+    ).join('');
+    
+    document.getElementById('selectTailor').innerHTML = options;
+    document.getElementById('paymentTailor').innerHTML = options;
+}
+
+// Helper Functions
+function getTotalSuits(tailorId, type) {
+    // Implement date filtering based on report type
+    return shopData.dailyWork
+        .filter(w => w.tailorId === tailorId)
+        .reduce((sum, w) => sum + w.suits, 0);
+}
+
+function getTotalAmount(tailorId, type) {
+    // Implement date filtering based on report type
+    return shopData.dailyWork
+        .filter(w => w.tailorId === tailorId)
+        .reduce((sum, w) => sum + w.calculatedAmount, 0);
+}
+
+// Initialize
+updateTailorDropdowns();
+</script>
+
+<style>
+.subsection {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+    border: 1px solid #eee;
+}
+
+.report-filters button {
+    margin: 5px;
+    padding: 8px 15px;
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.report-table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+}
+
+.report-table th {
+    background: #2c3e50;
+    color: white;
+    padding: 10px;
+}
+
+.report-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+</style><!-- Customer Measurements Section -->
+<div id="customer-management" class="section hidden">
+    <h2>Customer Measurements 
+        <span class="limit-counter">(${shopData.customers.length}/2000)</span>
+    </h2>
+    
+    <!-- New Customer Form -->
+    <div class="subsection">
+        <h3>Add New Customer</h3>
+        <div class="measurement-form">
+            <input type="text" id="custName" placeholder="Customer Name" required>
+            <input type="date" id="measurementDate" required>
+            <div class="measurement-grid">
+                <div class="measurement-item">
+                    <label>Length (Lambai): <span class="required">*</span></label>
+                    <input type="number" step="0.5" id="lambai" required>
+                </div>
+                <div class="measurement-item">
+                    <label>Chest (Seena): <span class="required">*</span></label>
+                    <input type="number" step="0.5" id="seena" required>
+                </div>
+                <div class="measurement-item">
+                    <label>Waist (Teera): <span class="required">*</span></label>
+                    <input type="number" step="0.5" id="teera" required>
+                </div>
+                <div class="measurement-item">
+                    <label>Sleeve (Bazoo):</label>
+                    <input type="number" step="0.5" id="bazoo">
+                </div>
+                <div class="measurement-item">
+                    <label>Upper Weight:</label>
+                    <input type="number" step="0.5" id="weightUp">
+                </div>
+                <div class="measurement-item">
+                    <label>Lower Weight:</label>
+                    <input type="number" step="0.5" id="weightDown">
+                </div>
+                <div class="measurement-item">
+                    <label>Shoulder (Shaler):</label>
+                    <input type="number" step="0.5" id="shaler">
+                </div>
+                <div class="measurement-item">
+                    <label>Pant Length (Pancha):</label>
+                    <input type="number" step="0.5" id="pancha">
+                </div>
+                <div class="measurement-item full-width">
+                    <label>Additional Notes:</label>
+                    <textarea id="custNotes" rows="3"></textarea>
+                </div>
+            </div>
+            <button onclick="addCustomer()">Save Measurements</button>
+        </div>
+    </div>
+
+    <!-- Customers List -->
+    <div class="subsection">
+        <h3>Customer Records</h3>
+        <div class="search-box">
+            <input type="text" id="searchCustomer" placeholder="Search by name..." onkeyup="searchCustomers()">
+        </div>
+        <table id="customersTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Measurements</th>
+                    <th>Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+// Add to data structure
+shopData.customers = [];
+
+// Add New Customer
+function addCustomer() {
+    if(shopData.customers.length >= 2000) {
+        alert('Customer limit reached! Maximum 2000 customers allowed.');
+        return;
+    }
+
+    const newCustomer = {
+        id: Date.now(),
+        name: document.getElementById('custName').value,
+        date: document.getElementById('measurementDate').value,
+        measurements: {
+            lambai: parseFloat(document.getElementById('lambai').value),
+            seena: parseFloat(document.getElementById('seena').value),
+            teera: parseFloat(document.getElementById('teera').value),
+            bazoo: parseFloat(document.getElementById('bazoo').value) || null,
+            weightUp: parseFloat(document.getElementById('weightUp').value) || null,
+            weightDown: parseFloat(document.getElementById('weightDown').value) || null,
+            shaler: parseFloat(document.getElementById('shaler').value) || null,
+            pancha: parseFloat(document.getElementById('pancha').value) || null
+        },
+        notes: document.getElementById('custNotes').value,
+        created: new Date()
+    };
+
+    shopData.customers.push(newCustomer);
+    saveData();
+    updateCustomerDisplay();
+    clearMeasurementForm();
+}
+
+// Clear form after submission
+function clearMeasurementForm() {
+    document.getElementById('custName').value = '';
+    document.getElementById('measurementDate').value = '';
+    document.getElementById('lambai').value = '';
+    document.getElementById('seena').value = '';
+    document.getElementById('teera').value = '';
+    document.getElementById('bazoo').value = '';
+    document.getElementById('weightUp').value = '';
+    document.getElementById('weightDown').value = '';
+    document.getElementById('shaler').value = '';
+    document.getElementById('pancha').value = '';
+    document.getElementById('custNotes').value = '';
+}
+
+// Display Customers
+function updateCustomerDisplay() {
+    const tbody = document.querySelector('#customersTable tbody');
+    tbody.innerHTML = '';
+    
+    shopData.customers.forEach(customer => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${customer.name}</td>
+                <td>${customer.date}</td>
+                <td>
+                    <div class="measurement-details">
+                        <span>L: ${customer.measurements.lambai}"</span>
+                        <span>C: ${customer.measurements.seena}"</span>
+                        <span>W: ${customer.measurements.teera}"</span>
+                        ${customer.measurements.pancha ? `<span>P: ${customer.measurements.pancha}"</span>` : ''}
+                    </div>
+                </td>
+                <td>${customer.notes || '-'}</td>
+                <td>
+                    <button onclick="viewCustomer(${customer.id})">View</button>
+                    <button onclick="deleteCustomer(${customer.id})">Delete</button>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+// Search Customers
+function searchCustomers() {
+    const searchTerm = document.getElementById('searchCustomer').value.toLowerCase();
+    const filtered = shopData.customers.filter(customer => 
+        customer.name.toLowerCase().includes(searchTerm)
+    );
+    
+    const tbody = document.querySelector('#customersTable tbody');
+    tbody.innerHTML = '';
+    
+    filtered.forEach(customer => {
+        // Same display code as updateCustomerDisplay
+    });
+}
+
+// View Customer Details
+function viewCustomer(id) {
+    const customer = shopData.customers.find(c => c.id === id);
+    const details = `
+        <h4>${customer.name}'s Measurements</h4>
+        <p>Date: ${customer.date}</p>
+        <div class="measurement-details">
+            <p>Length (Lambai): ${customer.measurements.lambai}"</p>
+            <p>Chest (Seena): ${customer.measurements.seena}"</p>
+            <p>Waist (Teera): ${customer.measurements.teera}"</p>
+            ${customer.measurements.bazoo ? `<p>Sleeve (Bazoo): ${customer.measurements.bazoo}"</p>` : ''}
+            ${customer.measurements.weightUp ? `<p>Upper Weight: ${customer.measurements.weightUp}kg</p>` : ''}
+            ${customer.measurements.weightDown ? `<p>Lower Weight: ${customer.measurements.weightDown}kg</p>` : ''}
+            ${customer.measurements.shaler ? `<p>Shoulder (Shaler): ${customer.measurements.shaler}"</p>` : ''}
+            ${customer.measurements.pancha ? `<p>Pant Length (Pancha): ${customer.measurements.pancha}"</p>` : ''}
+        </div>
+        <p>Notes: ${customer.notes || 'No additional notes'}</p>
+    `;
+    
+    // Implement a modal or dedicated view section
+    alert(details); // Replace with proper modal implementation
+}
+
+// Delete Customer
+function deleteCustomer(id) {
+    if(confirm('Are you sure you want to delete this customer record?')) {
+        shopData.customers = shopData.customers.filter(c => c.id !== id);
+        saveData();
+        updateCustomerDisplay();
+    }
+}
+
+// Initialize
+updateCustomerDisplay();
+</script>
+
+<style>
+.measurement-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.measurement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.measurement-item label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.measurement-item input,
+.measurement-item textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.required {
+    color: #e74c3c;
+}
+
+.measurement-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.measurement-details span {
+    background: #f8f9fa;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #eee;
+}
+
+.search-box {
+    margin: 15px 0;
+}
+
+#searchCustomer {
+    width: 300px;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
+</style<!-- Customer Table Section -->
+<div class="subsection">
+    <h3>Customer Records</h3>
+    <table id="customersTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Lambai</th>
+                <th>Seena</th>
+                <th>Teera</th>
+                <th>Other Data</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="customersList"></tbody>
+    </table>
+</div>
+
+<script>
+// Modified Data Structure
+shopData.customers = [];
+
+// Add Customer Function
+function addCustomer() {
+    if(shopData.customers.length >= 2000) {
+        alert('Customer limit reached! Maximum 2000 customers allowed.');
+        return;
+    }
+
+    const newCustomer = {
+        id: Date.now(),
+        name: document.getElementById('custName').value,
+        date: document.getElementById('measurementDate').value,
+        measurements: {
+            lambai: document.getElementById('lambai').value,
+            seena: document.getElementById('seena').value,
+            teera: document.getElementById('teera').value
+        },
+        otherData: "" // New field for additional data
+    };
+
+    shopData.customers.push(newCustomer);
+    saveData();
+    updateCustomerDisplay();
+}
+
+// Update Display Function
+function updateCustomerDisplay() {
+    const tbody = document.getElementById('customersList');
+    tbody.innerHTML = '';
+    
+    shopData.customers.forEach(customer => {
+        tbody.innerHTML += `
+            <!-- Main Data Row -->
+            <tr>
+                <td>${customer.name}</td>
+                <td>${customer.date}</td>
+                <td>${customer.measurements.lambai}"</td>
+                <td>${customer.measurements.seena}"</td>
+                <td>${customer.measurements.teera}"</td>
+                <td>${customer.otherData || '-'}</td>
+                <td>
+                    <button onclick="editCustomer(${customer.id})">Edit</button>
+                    <button onclick="deleteCustomer(${customer.id})">Delete</button>
+                </td>
+            </tr>
+            
+            <!-- Additional Data Row -->
+            <tr class="extra-data-row" id="extra-${customer.id}">
+                <td colspan="7">
+                    <div class="extra-data-container">
+                        <input type="text" 
+                               id="otherData-${customer.id}" 
+                               placeholder="Enter other data (e.g., special instructions)"
+                               value="${customer.otherData || ''}">
+                        <button onclick="saveOtherData(${customer.id})">Save</button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    });
+}
+
+// Save Additional Data Function
+function saveOtherData(customerId) {
+    const customer = shopData.customers.find(c => c.id === customerId);
+    const inputField = document.getElementById(`otherData-${customerId}`);
+    customer.otherData = inputField.value;
+    saveData();
+    alert('Additional data saved successfully!');
+}
+
+// Edit Customer Function
+function editCustomer(customerId) {
+    const extraRow = document.getElementById(`extra-${customerId}`);
+    extraRow.style.display = 'table-row';
+}
+
+// CSS Additions
+.extra-data-row {
+    display: none;
+    background: #f9f9f9;
+}
+
+.extra-data-container {
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.extra-data-container input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+</script><!-- Bulk Print Section -->
+<div class="section">
+    <h2>Bulk Print Measurements</h2>
+    
+    <div class="bulk-input">
+        <textarea 
+            id="customerIds" 
+            rows="5" 
+            placeholder="Enter customer IDs separated by commas or new lines
+Example:
+201, 202
+203,204
+205"></textarea>
+        <button onclick="processBulkPrint()">Generate Print View</button>
+    </div>
+
+    <div id="printPreview" class="hidden">
+        <div class="print-header">
+            <h2>Hill Top Cloth Mall</h2>
+            <p>Customer Measurements Report</p>
+            <p>Date: <span id="reportDate"></span></p>
+        </div>
+        
+        <div id="bulkMeasurements"></div>
+        
+        <div class="print-actions">
+            <button onclick="window.print()">Print Now</button>
+            <button onclick="closePrint()">Close</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Process Bulk Print
+function processBulkPrint() {
+    const input = document.getElementById('customerIds').value;
+    const customerIds = input.split(/[\n,]+/).map(id => parseInt(id.trim()));
+    
+    const validCustomers = customerIds
+        .map(id => shopData.customers.find(c => c.id === id))
+        .filter(c => c !== undefined);
+
+    if(validCustomers.length === 0) {
+        alert('No valid customer IDs found!');
+        return;
+    }
+
+    document.getElementById('reportDate').textContent = new Date().toLocaleDateString();
+    const container = document.getElementById('bulkMeasurements');
+    container.innerHTML = '';
+    
+    validCustomers.forEach((customer, index) => {
+        container.innerHTML += `
+            <div class="measurement-card">
+                <h3>${index + 1}. ${customer.name} (ID: ${customer.id})</h3>
+                <div class="measurement-grid">
+                    <div>Length: ${customer.measurements.lambai}"</div>
+                    <div>Chest: ${customer.measurements.seena}"</div>
+                    <div>Waist: ${customer.measurements.teera}"</div>
+                    ${customer.measurements.bazoo ? `<div>Sleeve: ${customer.measurements.bazoo}"</div>` : ''}
+                    ${customer.measurements.pancha ? `<div>Pant: ${customer.measurements.pancha}"</div>` : ''}
+                    ${customer.otherData ? `<div>Notes: ${customer.otherData}</div>` : ''}
+                </div>
+            </div>
+            <hr>
+        `;
+    });
+
+    document.getElementById('printPreview').classList.remove('hidden');
+}
+
+function closePrint() {
+    document.getElementById('printPreview').classList.add('hidden');
+}
+</script>
+
+<style>
+/* Bulk Print Styles */
+.bulk-input {
+    max-width: 600px;
+    margin: 20px 0;
+}
+
+#customerIds {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#printPreview {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+.print-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 20px;
+}
+
+.measurement-card {
+    margin: 20px 0;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.measurement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.print-actions {
+    margin-top: 30px;
+    text-align: center;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #printPreview, #printPreview * {
+        visibility: visible;
+    }
+    .print-actions {
+        display: none;
+    }
+    .measurement-card {
+        page-break-inside: avoid;
+    }
+}
+</style><!-- Add this in your HTML -->
+<div class="section">
+    <h2>Serial Number Wise Print</h2>
+    <div class="serial-input">
+        <textarea 
+            id="serialNumbers" 
+            rows="5" 
+            placeholder="Enter serial numbers separated by commas or new lines
+Example:
+1,3,5
+2,4,6"></textarea>
+        <button onclick="processSerialPrint()">Generate Print</button>
+    </div>
+
+    <div id="serialPrintPreview" class="hidden">
+        <div class="print-header">
+            <h2>Hill Top Cloth Mall</h2>
+            <p>Serial Wise Measurements Report</p>
+        </div>
+        
+        <div id="serialDataContainer"></div>
+        
+        <div class="print-actions">
+            <button onclick="printSerialData()">🖨️ Print</button>
+            <button onclick="closeSerialPreview()">Close</button>
+        </div>
+    </div>
+</div>
+
+<script>
+// Process Serial Numbers
+function processSerialPrint() {
+    const input = document.getElementById('serialNumbers').value;
+    const serials = input.split(/[\n,]+/).map(s => parseInt(s.trim()) - 1); // Convert to 0-based index
+    
+    const validCustomers = serials
+        .filter(index => index >= 0 && index < shopData.customers.length)
+        .map(index => ({
+            serial: index + 1,
+            ...shopData.customers[index]
+        }));
+
+    if(validCustomers.length === 0) {
+        alert('Invalid serial numbers!');
+        return;
+    }
+
+    const container = document.getElementById('serialDataContainer');
+    container.innerHTML = '';
+    
+    validCustomers.forEach(customer => {
+        container.innerHTML += `
+            <div class="serial-card">
+                <h3>Serial: ${customer.serial}</h3>
+                <div class="customer-details">
+                    <p>Name: ${customer.name}</p>
+                    <p>Date: ${customer.date}</p>
+                    <div class="measurements">
+                        <span>Length: ${customer.measurements.lambai}"</span>
+                        <span>Chest: ${customer.measurements.seena}"</span>
+                        <span>Waist: ${customer.measurements.teera}"</span>
+                        ${customer.otherData ? `<p>Notes: ${customer.otherData}</p>` : ''}
+                    </div>
+                </div>
+            </div>
+            <div class="page-break"></div>
+        `;
+    });
+
+    document.getElementById('serialPrintPreview').classList.remove('hidden');
+}
+
+// Print Function
+function printSerialData() {
+    window.print();
+}
+
+// Close Preview
+function closeSerialPreview() {
+    document.getElementById('serialPrintPreview').classList.add('hidden');
+}
+</script>
+
+<style>
+/* Serial Print Styles */
+.serial-input {
+    max-width: 600px;
+    margin: 20px 0;
+}
+
+#serialNumbers {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #2ecc71;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.serial-card {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.customer-details {
+    margin-left: 20px;
+}
+
+.measurements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.page-break {
+    height: 0;
+    break-after: page;
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #serialPrintPreview, #serialPrintPreview * {
+        visibility: visible;
+    }
+    .print-actions {
+        display: none;
+    }
+    .serial-card {
+        page-break-inside: avoid;
+    }
+}
+</style<!-- Fabric Roll Management System -->
+<div class="section">
+    <h2>Fabric Roll Inventory <span class="counter">(${fabricRolls.length})</span></h2>
+    
+    <div class="subsection">
+        <h3>Add New Fabric Roll</h3>
+        <div class="fabric-form">
+            <input type="text" id="fabricType" placeholder="Fabric Type (e.g., Cotton, Silk)">
+            <input type="number" id="rollLength" placeholder="Total Meters">
+            <input type="number" id="costPerMeter" placeholder="Cost per Meter (₹)">
+            <button onclick="addFabricRoll()">Add Roll</button>
+        </div>
+    </div>
+
+    <div class="subsection">
+        <h3>Active Rolls</h3>
+        <div class="roll-grid">
+            <div class="roll-card" v-for="roll in fabricRolls">
+                <div class="roll-header">
+                    <span class="roll-id">#${roll.id}</span>
+                    <span class="remaining ${roll.remaining < 10 ? 'low-stock' : ''}">
+                        Remaining: ${roll.remaining.toFixed(2)}m
+                    </span>
+                </div>
+                <div class="roll-body">
+                    <p>Type: ${roll.type}</p>
+                    <p>Original Length: ${roll.total}m</p>
+                    <p>Cost: ₹${roll.cost}/m</p>
+                    <div class="roll-actions">
+                        <input type="number" step="0.5" id="use-${roll.id}" placeholder="Meters used">
+                        <button onclick="useFabric(${roll.id})">Use</button>
+                        <button onclick="showRollHistory(${roll.id})">History</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Fabric Roll Data Structure
+let fabricRolls = [];
+
+function addFabricRoll() {
+    const newRoll = {
+        id: Date.now(),
+        type: document.getElementById('fabricType').value,
+        total: parseFloat(document.getElementById('rollLength').value),
+        remaining: parseFloat(document.getElementById('rollLength').value),
+        cost: parseFloat(document.getElementById('costPerMeter').value),
+        history: []
+    };
+    fabricRolls.push(newRoll);
+    updateFabricDisplay();
+}
+
+function useFabric(rollId) {
+    const roll = fabricRolls.find(r => r.id === rollId);
+    const used = parseFloat(document.getElementById(`use-${rollId}`).value);
+    
+    if(used > roll.remaining) {
+        alert(`Only ${roll.remaining}m remaining!`);
+        return;
+    }
+    
+    roll.remaining -= used;
+    roll.history.push({
+        date: new Date(),
+        used: used,
+        customerId: selectedCustomer?.id || null
+    });
+    
+    updateFabricDisplay();
+}
+
+function showRollHistory(rollId) {
+    const roll = fabricRolls.find(r => r.id === rollId);
+    const historyHTML = roll.history.map(entry => `
+        <tr>
+            <td>${entry.date.toLocaleDateString()}</td>
+            <td>${entry.used}m</td>
+            <td>${entry.customerId ? `Customer #${entry.customerId}` : 'N/A'}</td>
+        </tr>
+    `).join('');
+    
+    // Show in modal
+    openModal(`
+        <h3>Roll #${rollId} Usage History</h3>
+        <table class="history-table">
+            <tr>
+                <th>Date</th>
+                <th>Used</th>
+                <th>Customer</th>
+            </tr>
+            ${historyHTML}
+        </table>
+    `);
+}
+
+function updateFabricDisplay() {
+    // Update UI and counters
+}
+</script>
+
+<style>
+.roll-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.roll-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.roll-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.low-stock {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.roll-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.history-table {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.history-table th {
+    background: #f8f9fa;
+}
+</style><!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>میری ویب سائٹ</title>
+    <link rel="stylesheet" href="style.css"> <!-- یہاں CSS فائل کو لنک کریں -->
+</head>
+<body>
+    <h1>ہیلو دنیا!</h1>
+</body>
+</html><!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>میری ویب سائٹ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>ہیلو دنیا!</h1>
+    <button>کلک کریں</button>
+    <script src="script.js"></script> <!-- یہاں JavaScript فائل کو لنک کریں -->
+</body>
+</html><!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>میری ویب سائٹ</title>
+    <link rel="stylesheet" href="style.css"> <!-- یہاں CSS فائل کو لنک کریں -->
+</head>
+<body>
+    <h1>ہیلو دنیا!</h1>
+</body>
+</html><!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>میری ویب سائٹ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>ہیلو دنیا!</h1>
+    <button>کلک کریں</button>
+    <script src="script.js"></script> <!-- یہاں JavaScript فائل کو لنک کریں -->
+</body>
+</html>

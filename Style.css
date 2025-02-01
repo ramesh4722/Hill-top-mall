@@ -1,0 +1,441 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+header {
+  background-color: #007BFF;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+header nav button {
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+header nav button:hover {
+  background-color: #004080;
+}
+
+main {
+  padding: 20px;
+}
+
+section {
+  display: none;
+}
+
+section.active {
+  display: block;
+}
+
+.product-list, .service-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.product, .service {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 200px;
+}
+
+.product img, .service img {
+  max-width: 100%;
+  border-radius: 10px;
+}
+
+button {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+}
+
+.close {
+  float: right;
+  cursor: pointer;
+}
+
+.checkout-btn {
+  background-color: #28a745;
+  margin-top: 20px;
+}
+
+.checkout-btn:hover {
+  background-color: #218838;
+/* Existing Styles + New Additions */
+
+/* Stock Management */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #007BFF;
+  color: white;
+}
+
+input[type="text"], input[type="number"], input[type="date"] {
+  padding: 8px;
+  margin: 5px;
+  width: 200px;
+}
+
+/* Finance Reports */
+#report-data {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Chat System */
+#chat-messages {
+  height: 300px;
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 10px;
+  overflow-y: auto;
+}
+
+.message-box {
+  display: flex;
+  gap: 10px;
+}// realtime.js
+const socket = new WebSocket('wss://your-server.com/ws');
+
+// Stock Update Broadcast
+function broadcastStockUpdate(productId, newStock) {
+  socket.send(JSON.stringify({
+    type: 'stock_update',
+    productId,
+    newStock
+  }));
+}
+
+// Receive Updates
+socket.onmessage = (event) => {
+  const msg = JSON.parse(event.data);
+  switch(msg.type) {
+    case 'stock_update':
+      updateStockUI(msg.productId, msg.newStock);
+      break;
+    case 'chat_message':
+      addChatMessage(msg.text);
+      break;
+  }
+};
+
+// Collaborative Chat
+function sendCollaborativeMessage(text) {
+  socket.send(JSON.stringify({
+    type: 'chat_message',
+    text,
+    timestamp: Date.now()
+  }));
+}.status-badge {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.8em;
+}
+
+.Pending {
+    background: #ff9f43;
+    color: white;
+}
+
+.Confirmed {
+    background: #2ed573;
+    color: white;
+}
+
+.Cancelled {
+    background: #ff4757;
+    color: white;
+}/* Status Badges */
+.status-paid {
+    background: #2ecc71;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+}
+
+/* Hover Effects */
+tr:hover td {
+    background: #f8f9fa;
+}
+
+/* Print Styles */
+@media print {
+    .billing-container {
+        box-shadow: none;
+        border-radius: 0;
+    }
+    
+    .btn {
+        display: none;
+    }
+    
+    .billing-header {
+        background: #fff !important;
+        color: #000 !important;
+        border-bottom: 2px solid #000;
+    }
+}/* Ripple Effect */
+button {
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(5);
+    opacity: 0;
+  }
+}
+
+/* Smooth Section Transitions */
+section {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+section.active {
+  opacity: 1;
+}
+
+/* Floating Action Button */
+.fab {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.fab-btn {
+  background-color: #ff4081;
+  color: white;
+  border-radius: 50%;
+  font-size: 30px;
+  width: 60px;
+  height: 60px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.fab-btn:hover {
+  background-color: #f50057;
+}
+
+/* Scroll to Top Button */
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+  display: none;
+}
+
+.scroll-to-top button {
+  background-color: #2196f3;
+  color: white;
+  font-size: 20px;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.scroll-to-top button:hover {
+  background-color: #1976d2;
+/* Countdown Timer Styling */
+#countdown {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff4081;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+/* Initial invisible state */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Visible state when scrolled into view */
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+/* Cart Animation */
+#cart-icon {
+  position: relative;
+}
+
+.cart-animation {
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(1); }
+  75% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}/* Modal Styles */
+#modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: -4px 0 6px rgba(0, 0, 0, 0.2);
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#modal .close-btn {
+  background-color: #f44336;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}/* Styling Product Cards */
+.product-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 15px;
+  text-align: center;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-10px);
+}
+
+.product-image {
+  max-width: 100%;
+  border-radius: 5px;
+}
+
+.product-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.product-price {
+  font-size: 1.1em;
+  color: #ff4081;
+  margin: 5px 0;
+}
+
+.product-card button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-card button:hover {
+  background-color: #45a049;
+}
